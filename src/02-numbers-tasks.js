@@ -201,7 +201,8 @@ function isPrime(n) {
     if (n % i === 0) {
       return false;
     }
-  } return true;
+  }
+  return true;
 }
 
 /**
@@ -219,8 +220,11 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  if (Number.isNaN(+value)) {
+    return def;
+  }
+  return +value;
 }
 
 module.exports = {
