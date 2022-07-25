@@ -179,10 +179,11 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(str) {
-  for (let i = 0; i < str.length; i += 1) {
-    if(str.lastIndexOf(str[i]) === i)
-  }
+function findFirstSingleChar(/* str */) {
+  //   for (let i = 0; i < str.length; i += 1) {
+  //     if(str.lastIndexOf(str[i]) === i)
+  //   }
+  throw new Error('Not implemented');
 }
 
 /**
