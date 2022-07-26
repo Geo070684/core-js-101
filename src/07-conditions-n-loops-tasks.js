@@ -325,7 +325,7 @@ getDigitalRoot(123456);
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(str) {
+function isBracketsBalanced(/* str */) {
   throw new Error('Not implemented');
 }
 
