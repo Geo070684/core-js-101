@@ -210,8 +210,10 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const firstBracket = isStartIncluded ? '[' : '(';
+  const secondBracket = isEndIncluded ? ']' : ')';
+  return `${firstBracket}${Math.min(a, b)}, ${Math.max(a, b)}${secondBracket}`;
 }
 
 /**
@@ -266,10 +268,19 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const newNumber = String(ccn).split('');
+  const newStart = (newNumber.length - 1) % 2 === 0 ? 1 : 0;
+  for (let i = newStart; i < newNumber.length; i += 2) {
+    let num = newNumber[i] * 2;
+    if (num > 9) {
+      num -= 9;
+    }
+    newNumber[i] = num;
+  }
+  return newNumber.reduce((a, b) => +a + +b, 0) % 10 === 0;
 }
-
+isCreditCardNumber(378734493671000);
 /**
  * Returns the digital root of integer:
  *   step1 : find sum of all digits
@@ -284,10 +295,15 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const numArr = String(num).split('');
+  const summ = numArr.reduce((sum, curr) => sum + +curr, 0);
+  return summ > 9
+    ? getDigitalRoot(summ)
+    : summ;
+  // console.log(summ);
 }
-
+getDigitalRoot(123456);
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
  * Balanced means that is, whether it consists entirely of pairs of opening/closing brackets
@@ -309,7 +325,7 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
+function isBracketsBalanced(str) {
   throw new Error('Not implemented');
 }
 
