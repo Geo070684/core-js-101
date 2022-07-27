@@ -24,8 +24,8 @@
  */
 function getComposition(f, g) {
   // eslint-disable-next-line func-names
-  return function (param) {
-    return f(g(param));
+  return function (...param) {
+    return f(g(...param));
   };
 }
 
