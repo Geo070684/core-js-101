@@ -23,7 +23,10 @@
  *
  */
 function getComposition(f, g) {
-  return (param) => f(g(param));
+  // eslint-disable-next-line func-names
+  return function (param) {
+    return f(g(param));
+  };
 }
 
 /**
@@ -42,8 +45,11 @@ function getComposition(f, g) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  // eslint-disable-next-line func-names
+  return function (n) {
+    return n ** exponent;
+  };
 }
 
 /**
@@ -59,10 +65,25 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
-}
 
+function getPolynom(...arg) {
+  if (arg.length === 0) {
+    return null;
+  }
+  // eslint-disable-next-line func-names
+  return function (x) {
+    let res = '';
+    if (arg.length === 3) {
+      res = arg[0] * x ** 2 + arg[1] * x + arg[2];
+    } else if (arg.length === 2) {
+      res = arg[0] * x + arg[1];
+    } else if (arg.length === 1) {
+      res = arg[0] * 1;
+    }
+    return res;
+  };
+}
+// eslint-disable-next-line no-undef
 /**
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
@@ -77,8 +98,12 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  const save = func();
+  // eslint-disable-next-line func-names
+  return function () {
+    return save;
+  };
 }
 
 /**
