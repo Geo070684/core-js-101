@@ -121,10 +121,19 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  // eslint-disable-next-line func-names
+  return function () {
+    for (let i = 1; i <= attempts; i += 1) {
+      try {
+        return func();
+      } catch (err) {
+        i += 0;
+      }
+    }
+    return null;
+  };
 }
-
 /**
  * Returns the logging wrapper for the specified method,
  * Logger has to log the start and end of calling the specified function.
