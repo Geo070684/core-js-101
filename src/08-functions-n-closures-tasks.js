@@ -179,7 +179,7 @@ function partialUsingArguments(fn, ...args1) {
   return function (...arg) {
     const res = [...args1, ...arg];
     // eslint-disable-next-line prefer-spread
-    return fn.apply(null, res);
+    return fn.call(null, ...res);
   };
 }
 
@@ -200,8 +200,13 @@ function partialUsingArguments(fn, ...args1) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let count = startFrom - 1;
+  // eslint-disable-next-line func-names
+  return function () {
+    count += 1;
+    return count;
+  };
 }
 
 module.exports = {
