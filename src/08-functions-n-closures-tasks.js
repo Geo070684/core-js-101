@@ -128,7 +128,8 @@ function retry(func, attempts) {
       try {
         return func();
       } catch (err) {
-        i += 0;
+        // eslint-disable-next-line no-console
+        console.log(err);
       }
     }
     return null;
